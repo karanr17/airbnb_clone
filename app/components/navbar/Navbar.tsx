@@ -1,6 +1,8 @@
 import React from 'react'
 import Container from '../Container'
 import Logo from './Logo'
+import SearchBar from './SearchBar'
+import UserMenu from './UserMenu'
 
 const Navbar = () => {
   return (
@@ -16,6 +18,8 @@ const Navbar = () => {
                     md:gap-0
                 '>
                     <Logo />
+                    <SearchBar />
+                    <UserMenu />
                 </div>
             </Container>
         </div>
