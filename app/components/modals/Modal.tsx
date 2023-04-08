@@ -74,7 +74,7 @@ const Modal: React.FC<ModalProps> = ({
             justify-center
             items-center
             overflow-x-hidden
-            overflow-y-auto
+            overflow-y-hidden
             fixed
             inset-0
             z-50
@@ -89,12 +89,14 @@ const Modal: React.FC<ModalProps> = ({
             w-full
             md:w-4/6
             lg:w-3/6
-            xl:w-3/5
+            xl:w-2/5
             my-6
             mx-auto
             h-full
             md:h-auto
+            md:scale-75
             lg:h-auto
+            lg:scale-75
         "
         >
           {/* Content */}
@@ -179,6 +181,7 @@ const Modal: React.FC<ModalProps> = ({
                     onClick={handleSubmit}
                   />
                 </div>
+                  {footer}
               </div>
             </div>
           </div>
