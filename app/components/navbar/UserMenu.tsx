@@ -1,12 +1,14 @@
 "use client";
 import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../Avatar";
-import { useState } from "react";
-import MenuItem from "./MenuItem";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import { useCallback, useState } from "react";
 import { signOut } from "next-auth/react";
+import MenuItem from "./MenuItem";
+
 import { SafeUser } from "@/app/types";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useRentModal from "@/app/hooks/useRentModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -14,6 +16,7 @@ interface UserMenuProps {
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
+  const rentModal = useRentModal();
   const loginModal = useLoginModal();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,11 +24,19 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     setIsOpen((prevState) => !prevState);
   };
 
+  const onRent = useCallback(() => {
+    if(!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    rentModal.onOpen();
+  },[currentUser, loginModal])
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={() => {}}
+          onClick={onRent}
           className="
                 hidden
                 md:block
@@ -88,7 +99,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <MenuItem onCLick={() => {}} label="My favourites" />
                 <MenuItem onCLick={() => {}} label="My reservations" />
                 <MenuItem onCLick={() => {}} label="My properties" />
-                <MenuItem onCLick={() => {}} label="Airbnb my home" />
+                <MenuItem onCLick={rentModal.onOpen} label="Airbnb my home" />
                 <hr />
                 <MenuItem onCLick={() => signOut()} label="Logout" />
 
