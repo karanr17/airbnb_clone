@@ -1,14 +1,14 @@
 "use client";
 
 interface MenuItemProps {
-  onCLick: () => void;
+  onClick: () => void;
   label: string;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ onCLick, label }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ onClick, label }) => {
   return (
     <div
-      onClick={onCLick}
+      onClick={onClick}
       className="
         px-4
         py-3
